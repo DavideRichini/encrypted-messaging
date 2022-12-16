@@ -2,7 +2,8 @@ from Crypto.Cipher import AES
 
 file_in = open("encrypted.bin", "rb")
 nonce, tag, ciphertext = [ file_in.read(x) for x in (16, 16, -1) ]
-key = b'0123456789012345'
+file_in=open("E:\key.bin", "rb")
+key = file_in.read(32)
 # let's assume that the key is somehow available again
 cipher = AES.new(key, AES.MODE_EAX, nonce)
 data = cipher.decrypt_and_verify(ciphertext, tag)
